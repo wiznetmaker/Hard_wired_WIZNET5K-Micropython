@@ -1,8 +1,8 @@
-#Ethernet Hat's LWIP vs Hard Wired Speed Comparison
+# Ethernet Hat's LWIP vs Hard Wired Speed Comparison
 
 In this project, we will explain how to create libraries for the LWIP and Hard-wired mode settings of the W5100S-EVB-Pico and W5500-EVB-Pico. We will also compare the network speeds of both modes using iperf3.
 
-##Set up Linux
+## Set up Linux
 From the Linux desktop, open a terminal by doing Right click, then “Open a terminal here”. Then enter the following commands, one by one, to install the required software.
 
 ```cpp
@@ -14,7 +14,7 @@ From the Linux desktop, open a terminal by doing Right click, then “Open a ter
 ```
 Enter your password when prompted. Press the “y” (or “o” if the language is french) key to accept the installation when prompted. Once the pre-requisite software is installed, it is necessary to retrieve the MicroPython project from the Git tool by writing to a terminal the following commands (open from a folder where the MicroPython utility will be placed)
 
-##Download Code
+## Download Code
 The MicroPython cross-compiler must be built first, which will be used to pre-compile (freeze) built-in Python code. This cross-compiler is built and run on the host machine using:
 
 ```cpp
@@ -23,7 +23,7 @@ git clone https://github.com/micropython/micropython.git
 
 ```
 
-##compile
+## Compile
 The MicroPython cross-compiler must be built first, which will be used to pre-compile (freeze) built-in Python code. This cross-compiler is built and run on the host machine using:
 
 ```cpp
@@ -43,14 +43,13 @@ $ make BOARD={your-board-model}
 ```
 
 It is necessary to replace {your-board-model} with the name of the board that is being used.
-For example, if you are using a `W5100S-EVB-Pico`, you will need to write the command:
 
+For example, if you are using a `W5100S-EVB-Pico`, you will need to write the command:
 ```cpp
 $ make BOARD=W5100S_EVB_PICO submodules
 $ make BOARD=W5100S_EVB_PICO clean
 $ make BOARD=W5100S_EVB_PICO
 ```
-
 Or using a `W5500-EVB-Pico`, you will need to write the command:
 ```cpp
 $ make BOARD=W5500_EVB_PICO submodules
@@ -63,7 +62,7 @@ The previous commands have generated a folder called build-{your– board–mode
 
 Firmware can be deployed to the device by putting it into bootloader mode (hold down BOOTSEL while powering on or resetting) and then copying `firmware.uf2` to the USB mass storage device that appears.
 
-#Setting up HardWired mode
+# Setting up HardWired mode
 
 The use of lwIP can be enabled or disabled by selecting the appropriate option in the configure `mpconfigboard.cmake` file located in the `ports/rp2/{your-board-model}`
 ```cpp
@@ -71,7 +70,8 @@ set(MICROPY_PY_LWIP 0)
 ```
 
 >1: LWIP
-0: Hard wired
+>
+>0: Hard wired
 
 It is necessary to verify if the LWIP settings have been applied correctly. Add logs to the WIZNET5K initialization to check.
 
@@ -107,7 +107,7 @@ STATIC void wiznet5k_init(void) {
 And then, run the make command again to apply the updated settings and compile
 
 
-##Performance tests with iperf3
+## Performance tests with iperf3
 The following serial terminal program is required for uIPerf3 test, download and install from below links.
 
 &#10004;[**Thonny**][link-thonny]
@@ -138,8 +138,9 @@ Now let's run the iperf3 on your board.
 
 ![][link-iperf3_clinet]
 
-it was found that the bitrate of the device in ___hard-wired mode is 80% higher___ than the LwIP.
+it was found that the bitrate of the device in __hard-wired mode is 80% higher__ than the LwIP.
 >LWIP: 747 kbits/sec
+>
 >Hardwired: 1.34Mbits/sec
 
 Therefore, to enhance the default network speed and performance for users,
@@ -154,4 +155,4 @@ Link
 [link-iperf3]: https://iperf.fr/iperf-download.php
 
 [link-iperf3_server]: https://github.com/Wiznet/W5300-TOE-MicroPython/blob/main/static/images/uiPerf3/iperf3_server.png
-[link-iperf3_clinet]: https://github.com/wiznetmaker/Hard_wired_WIZNET5K-Micropython/main/images/iperf3_client.png
+[link-iperf3_clinet]: https://github.com/wiznetmaker/Hard_wired_WIZNET5K-Micropython/blob/main/images/iperf3_client.png
